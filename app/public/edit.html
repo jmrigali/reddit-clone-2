@@ -1,0 +1,80 @@
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand">Reddit Clone</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    </div>
+  </div>
+</nav>
+<main class="container">
+
+  <div class="pull-right">
+
+    <p><a class="btn btn-info" name="newPostButton" ng-click="$ctrl.setTab()">New Post</a></p>
+
+  </div>
+
+  <ul class="nav nav-pills">
+    <li role="presentation" class="active">
+
+      <input type="search" class="form-control input-sm search-form" placeholder="Filter" ng-model="query.title">
+    </li>
+    <li class="dropdown form-inline" ng-init="sort='vote_count' ; sortName='Votes'">
+       <a href="#"
+         class="dropdown-toggle"
+         data-toggle="dropdown"
+         role="button"
+         aria-haspopup="true"
+         aria-expanded="false">Sort By {{sortName}}<span class="caret"></span></a>
+       <ul class="dropdown-menu">
+         <li><a ng-click="sort='vote_count' ; sortName='Votes'">Votes</a></li>
+         <li><a ng-click="sort='date' ; sortName='Date'">Date</a></li>
+         <li><a ng-click="sort='title' ; sortName='Title'">Title</a></li>
+       </ul>
+     </li>
+  </ul>
+
+  <div class="row" ng-if="$ctrl.tab==true">
+    <div class="col-md-8">
+      <form novalidate name="$ctrl.newMessagePost" ng-submit="$ctrl.editPost()">
+
+        <div ng-class="{'has-error':$ctrl.newMessagePost.post.title.$touched && $ctrl.newMessagePost.title.$invalid}">
+          <label for="title">Title</label>
+          <input id="title" class="form-control" name="title" ng-model="$ctrl.post.title" ng-value="$ctrl.posts.title" ng-minlength="5" required>
+          <span class="label label-danger" ng-show="$ctrl.newMessagePost.title.$invalid && $ctrl.newMessagePost.title.$touched">Not valid</span>
+        </div>
+        <div>
+          <label for="body">Body</label>
+          <textarea id="body" name="body" class="form-control" ng-model="$ctrl.post.body" ng-value="$ctrl.posts.body" ng-minlength="5" required></textarea>
+          <span class="label label-danger" ng-show="$ctrl.newMessagePost.body.$invalid && $ctrl.newMessagePost.body.$touched">Not valid</span>
+        </div>
+
+        <div>
+          <label for="author">Author</label>
+          <input id="author" name="author" class="form-control" ng-model="$ctrl.post.author" ng-value="$ctrl.posts.author" ng-minlength="5" required>
+          <span class="label label-danger" ng-show="$ctrl.newMessagePost.author.$invalid && $ctrl.newMessagePost.author.$touched">Not valid</span>
+        </div>
+
+        <div>
+          <label for="image-url">Image URL</label>
+          <input id="image-url" name="url" class="form-control" ng-model="$ctrl.post.image_url" ng-value="$ctrl.posts.image_url" ng-minlength="5" required>
+          <span class="label label-danger" ng-show="$ctrl.newMessagePost.url.$invalid && $ctrl.newMessagePost.url.$touched">Not valid</span>
+        </div>
+
+        <div class="form-group">
+          <button ng-disabled="$ctrl.newMessagePost.$invalid" type="submit" class="btn btn-primary">
+          Update
+          </button>
+
+        </div>
+      </form>
+    </div>
+  </div>

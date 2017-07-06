@@ -1,0 +1,11 @@
+input.ng-touched, textarea.ng-touched, input.ng-invalid, textarea.ng-invalid{
+  border: 2px solid orange;
+}
+
+.media-object{
+  width:200px;
+}
+
+#edit{
+  text-align: center;
+}
